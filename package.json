@@ -1,0 +1,17 @@
+{
+  "name": "git-repo",
+  "version": "1.0.0",
+  "main": "js/src/Repository",
+  "dependencies": {
+    "Promise": "aleclarson/Promise#1.0.0",
+    "Type": "aleclarson/Type#1.0.0",
+    "assert": "aleclarson/assert#1.0.0",
+    "getArgProp": "aleclarson/getArgProp#1.0.0",
+    "git-utils": "aleclarson/git-utils#1.0.0"
+  },
+  "lotus": {
+    "plugins": [
+      "lotus-coffee"
+    ]
+  }
+}
