@@ -17,7 +17,7 @@ type.argumentTypes = {
 };
 
 type.defineFrozenValues({
-  modulePath: getArgProp("modulePath")
+  modulePath: getArgProp(0)
 });
 
 type.defineValues({
@@ -52,14 +52,14 @@ type.defineMethods({
     this._staged = null;
     return git.commit(this.modulePath, message);
   },
-  getHead: function(branchName, remoteName) {
+  getHead: function(branchName, options) {
     if (!Promise.isRejected(this._head)) {
       return this._head;
     }
-    return this._head = git.getHead(this.modulePath, branchName, remoteName);
+    return this._head = git.getHead(this.modulePath, branchName, options);
   },
-  hasBranch: function(branchName, remoteName) {
-    return git.hasBranch(this.modulePath, branchName, remoteName);
+  hasBranch: function(branchName, options) {
+    return git.hasBranch(this.modulePath, branchName, options);
   },
   getBranch: function() {
     if (!Promise.isRejected(this._branch)) {
@@ -79,8 +79,8 @@ type.defineMethods({
   pushBranch: function(remoteName, options) {
     return git.pushBranch(this.modulePath, remoteName, options);
   },
-  deleteBranch: function(branchName, remoteName) {
-    return git.deleteBranch(this.modulePath, branchName, remoteName);
+  deleteBranch: function(branchName, options) {
+    return git.deleteBranch(this.modulePath, branchName, options);
   },
   resetBranch: function(commit, options) {
     this._clean = null;
@@ -89,8 +89,8 @@ type.defineMethods({
   addTag: function(tagName, options) {
     return git.addTag(this.modulePath, tagName, options);
   },
-  deleteTag: function(tagName, remoteName) {
-    return git.deleteTag(this.modulePath, tagName, remoteName);
+  deleteTag: function(tagName, options) {
+    return git.deleteTag(this.modulePath, tagName, options);
   }
 });
 

@@ -12,7 +12,7 @@ type.argumentTypes =
 
 type.defineFrozenValues
 
-  modulePath: getArgProp "modulePath"
+  modulePath: getArgProp 0
 
 type.defineValues
 
@@ -45,12 +45,12 @@ type.defineMethods
     @_staged = null
     git.commit @modulePath, message
 
-  getHead: (branchName, remoteName) ->
+  getHead: (branchName, options) ->
     return @_head if not Promise.isRejected @_head
-    @_head = git.getHead @modulePath, branchName, remoteName
+    @_head = git.getHead @modulePath, branchName, options
 
-  hasBranch: (branchName, remoteName) ->
-    git.hasBranch @modulePath, branchName, remoteName
+  hasBranch: (branchName, options) ->
+    git.hasBranch @modulePath, branchName, options
 
   getBranch: ->
     return @_branch if not Promise.isRejected @_branch
@@ -68,8 +68,8 @@ type.defineMethods
   pushBranch: (remoteName, options) ->
     git.pushBranch @modulePath, remoteName, options
 
-  deleteBranch: (branchName, remoteName) ->
-    git.deleteBranch @modulePath, branchName, remoteName
+  deleteBranch: (branchName, options) ->
+    git.deleteBranch @modulePath, branchName, options
 
   resetBranch: (commit, options) ->
     @_clean = null
@@ -78,8 +78,8 @@ type.defineMethods
   addTag: (tagName, options) ->
     git.addTag @modulePath, tagName, options
 
-  deleteTag: (tagName, remoteName) ->
-    git.deleteTag @modulePath, tagName, remoteName
+  deleteTag: (tagName, options) ->
+    git.deleteTag @modulePath, tagName, options
 
 # TODO: Add the other methods...
 
