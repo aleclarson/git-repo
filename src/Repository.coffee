@@ -1,5 +1,5 @@
 
-getArgProp = require "getArgProp"
+fromArgs = require "fromArgs"
 Promise = require "Promise"
 assert = require "assert"
 Type = require "Type"
@@ -12,7 +12,7 @@ type.argumentTypes =
 
 type.defineFrozenValues
 
-  modulePath: getArgProp 0
+  modulePath: fromArgs 0
 
 type.defineValues
 

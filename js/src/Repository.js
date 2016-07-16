@@ -1,6 +1,6 @@
-var Promise, Type, assert, getArgProp, git, type;
+var Promise, Type, assert, fromArgs, git, type;
 
-getArgProp = require("getArgProp");
+fromArgs = require("fromArgs");
 
 Promise = require("Promise");
 
@@ -17,7 +17,7 @@ type.argumentTypes = {
 };
 
 type.defineFrozenValues({
-  modulePath: getArgProp(0)
+  modulePath: fromArgs(0)
 });
 
 type.defineValues({
@@ -96,4 +96,4 @@ type.defineMethods({
 
 module.exports = type.build();
 
-//# sourceMappingURL=../../map/src/Repository.map
+//# sourceMappingURL=map/Repository.map
