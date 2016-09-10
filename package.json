@@ -5,8 +5,6 @@
   "dependencies": {
     "Promise": "aleclarson/Promise#1.0.0",
     "Type": "aleclarson/Type#1.1.0",
-    "assert": "aleclarson/assert#1.0.0",
-    "fromArgs": "aleclarson/fromArgs#1.0.0",
     "git-utils": "aleclarson/git-utils#1.0.0"
   },
   "lotus": {

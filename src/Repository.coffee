@@ -1,7 +1,5 @@
 
-fromArgs = require "fromArgs"
 Promise = require "Promise"
-assert = require "assert"
 Type = require "Type"
 git = require "git-utils"
 
@@ -12,7 +10,7 @@ type.argumentTypes =
 
 type.defineFrozenValues
 
-  modulePath: fromArgs 0
+  modulePath: (modulePath) -> modulePath
 
 type.defineValues
 
@@ -25,7 +23,8 @@ type.defineValues
   _staged: null
 
 type.initInstance (modulePath) ->
-  assert git.isRepo(modulePath), "Invalid repository path!"
+  if not git.isRepo modulePath
+    throw Error "Invalid repository path!"
 
 type.defineMethods
 
