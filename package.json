@@ -10,7 +10,7 @@
     "postinstall": "postinstall-build js 'npm run build'"
   },
   "dependencies": {
-    "Promise": "aleclarson/Promise#1.0.0",
+    "Promise": "aleclarson/Promise#2.0.0",
     "Type": "aleclarson/Type#1.1.0",
     "git-utils": "aleclarson/git-utils#1.0.0",
     "postinstall-build": "0.2.x"
