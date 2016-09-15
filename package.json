@@ -2,14 +2,20 @@
   "name": "git-repo",
   "version": "1.0.0",
   "main": "js/Repository",
+  "plugins": [
+    "lotus-coffee"
+  ],
+  "scripts": {
+    "build": "coffee -cb -o js src",
+    "postinstall": "postinstall-build js 'npm run build'"
+  },
   "dependencies": {
     "Promise": "aleclarson/Promise#1.0.0",
     "Type": "aleclarson/Type#1.1.0",
-    "git-utils": "aleclarson/git-utils#1.0.0"
+    "git-utils": "aleclarson/git-utils#1.0.0",
+    "postinstall-build": "0.2.x"
   },
-  "lotus": {
-    "plugins": [
-      "lotus-coffee"
-    ]
+  "devDependencies": {
+    "coffee-script": "1.9.x"
   }
 }
