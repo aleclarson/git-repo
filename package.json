@@ -1,0 +1,10 @@
+{
+  "name": "git-repo",
+  "version": "1.0.1",
+  "main": "js/Repository",
+  "dependencies": {
+    "Promise": "aleclarson/Promise#2.1.0",
+    "Type": "aleclarson/Type#2.1.0",
+    "git-utils": "aleclarson/git-utils#1.0.0"
+  }
+}
