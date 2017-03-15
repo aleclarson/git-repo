@@ -5,8 +5,7 @@ git = require "git-utils"
 
 type = Type "GitRepository"
 
-type.defineArgs
-  modulePath: String.isRequired
+type.defineArgs [String]
 
 type.defineFrozenValues
 
