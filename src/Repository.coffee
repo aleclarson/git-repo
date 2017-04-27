@@ -7,9 +7,9 @@ type = Type "GitRepository"
 
 type.defineArgs [String]
 
-type.defineFrozenValues
+type.defineFrozenValues (modulePath) ->
 
-  modulePath: (modulePath) -> modulePath
+  modulePath: modulePath
 
 type.defineValues
 
