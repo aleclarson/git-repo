@@ -1,84 +1,79 @@
+# TODO: Add missing methods
+assertValid = require "assertValid"
 
-Promise = require "Promise"
-Type = require "Type"
-git = require "git-utils"
+git = {}
 
-type = Type "GitRepository"
-
-type.defineArgs [String]
-
-type.defineFrozenValues (modulePath) ->
-
-  modulePath: modulePath
-
-type.defineValues
-
-  _head: null
-
-  _branch: null
-
-  _clean: null
-
-  _staged: null
-
-type.initInstance (modulePath) ->
-  if not git.isRepo modulePath
-    throw Error "Invalid repository path!"
-
-type.defineMethods
+class GitRepository
+  constructor: (@path) ->
+    assertValid @path, "string"
+    @_head = null
+    @_branch = null
+    @_clean = null
+    @_staged = null
 
   isClean: ->
-    return @_clean if not Promise.isRejected @_clean
-    @_clean = git.isClean @modulePath
+    git.isClean or= require "git-utils/lib/isClean"
+    @_clean or= git.isClean @path
 
   isStaged: ->
-    return @_staged if not Promise.isRejected @_staged
-    @_staged = git.isStaged @modulePath
+    git.isStaged or= require "git-utils/lib/isStaged"
+    @_staged or= git.isStaged @path
 
   stageFiles: (files) ->
     @_staged = null
-    git.stageFiles @modulePath, files
+    git.stageFiles or= require "git-utils/lib/stageFiles"
+    git.stageFiles @path, files
 
   commit: (message) ->
-    @_staged = null
-    git.commit @modulePath, message
+    @_clean = @_staged = null
+    git.commit or= require "git-utils/lib/commit"
+    git.commit @path, message
 
-  getHead: (branchName, options) ->
-    return @_head if not Promise.isRejected @_head
-    @_head = git.getHead @modulePath, branchName, options
+  getHead: (branch, opts) ->
+    git.getHead or= require "git-utils/lib/getHead"
+    @_head or= git.getHead @path, branch, opts
 
-  hasBranch: (branchName, options) ->
-    git.hasBranch @modulePath, branchName, options
+  hasBranch: (branch, opts) ->
+    git.hasBranch or= require "git-utils/lib/hasBranch"
+    git.hasBranch @path, branch, opts
 
   getBranch: ->
-    return @_branch if not Promise.isRejected @_branch
-    @_branch = git.getBranch @modulePath
+    git.getBranch or= require "git-utils/lib/getBranch"
+    @_branch or= git.getBranch @path
 
-  getBranches: (remoteName, options) ->
-    git.getBranches @modulePath, remoteName, options
+  getBranches: (remote, opts) ->
+    git.getBranches or= require "git-utils/lib/getBranches"
+    git.getBranches @path, remote, opts
 
-  setBranch: (branchName, options) ->
-    @_branch = git.setBranch @modulePath, branchName, options
+  setBranch: (branch, opts) ->
+    git.setBranch or= require "git-utils/lib/setBranch"
+    @_branch = git.setBranch @path, branch, opts
 
-  addBranch: (branchName) ->
-    @_branch = git.addBranch @modulePath, branchName
+  addBranch: (branch) ->
+    git.addBranch or= require "git-utils/lib/addBranch"
+    await git.addBranch @path, branch
+    @_branch = Promise.resolve branch
+    return
 
-  pushBranch: (remoteName, options) ->
-    git.pushBranch @modulePath, remoteName, options
+  pushBranch: (opts) ->
+    git.pushBranch or= require "git-utils/lib/pushBranch"
+    git.pushBranch @path, opts
 
-  deleteBranch: (branchName, options) ->
-    git.deleteBranch @modulePath, branchName, options
+  deleteBranch: (branch, opts) ->
+    git.deleteBranch or= require "git-utils/lib/deleteBranch"
+    git.deleteBranch @path, branch, opts
 
-  resetBranch: (commit, options) ->
+  resetBranch: (commit, opts) ->
     @_clean = null
-    git.resetBranch @modulePath, commit, options
+    git.resetBranch or= require "git-utils/lib/resetBranch"
+    git.resetBranch @path, commit, opts
 
-  addTag: (tagName, options) ->
-    git.addTag @modulePath, tagName, options
+  addTag: (tag, opts) ->
+    git.addTag or= require "git-utils/lib/addTag"
+    git.addTag @path, tag, opts
 
-  deleteTag: (tagName, options) ->
-    git.deleteTag @modulePath, tagName, options
+  deleteTag: (tag, opts) ->
+    git.deleteTag or= require "git-utils/lib/deleteTag"
+    git.deleteTag @path, tag, opts
 
-# TODO: Add the other methods...
-
-module.exports = type.build()
+module.exports = GitRepository
