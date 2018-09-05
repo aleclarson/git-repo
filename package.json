@@ -7,6 +7,9 @@
   "scripts": {
     "build": "coffee-build src -o lib"
   },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@cush/git-utils": "^2.0.0"
   },
