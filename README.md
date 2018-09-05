@@ -1,4 +1,4 @@
-# git-repo v1.1.0
+# git-repo v2.0.0
 
 `Repository` class driven by [aleclarson/git-utils](https://github.com/aleclarson/git-utils)
 
